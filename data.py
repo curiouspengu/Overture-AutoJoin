@@ -54,7 +54,6 @@ def main():
             }
         )
 
-
         try:
             response = response.json()
             if response == None:
@@ -91,6 +90,8 @@ def main():
             sleep(10)
         else:
             sleep(5)
+
+    
 
 def join_ps_link(link):
     webbrowser.open(link)

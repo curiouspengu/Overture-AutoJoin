@@ -95,3 +95,4 @@ for %%m in (%modules%) do (
 )
 
 python %0\..\data.py
+pause
