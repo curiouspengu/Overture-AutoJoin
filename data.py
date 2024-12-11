@@ -54,6 +54,7 @@ def main():
             }
         )
 
+
         try:
             response = response.json()
             if response == None:
@@ -62,8 +63,10 @@ def main():
                 messagebox.showerror("ERROR!", "This is usually caused by the authentication key timing out. Try refreshing the authentication key.")
             message = response[0]
             messages.append(message["id"])
+            
+            if message["id"] in messages:
+                continue
             link = re.findall(r'(https?://[^\s]+)', message["content"])[0]
-
             
             timestamp = datetime.datetime.fromisoformat(message["timestamp"])
             duration = datetime.datetime.now(datetime.timezone.utc) - timestamp
@@ -74,20 +77,17 @@ def main():
 
             while len(messages) > 10:
                 messages.popleft()
-            
-            if config["extremely fast autojoin (dangerous)"] == "1":
-                pass
-            elif config["faster autojoin (may be dangerous)"] == "1":
-                sleep(1)
-            else:
-                sleep(5)
         except:
-            pass
+            print(f"Error! Discord API Responded with: [{response}]")
         
-        if message["id"] in messages:
-            continue
-
-       
+        if config["extremely fast autojoin (dangerous)"] == "1":
+            pass
+        elif config["faster autojoin (may be dangerous)"] == "1":
+            sleep(1)
+        elif config["slower_autojoin (may be safer)"] == "1":
+            sleep(10)
+        else:
+            sleep(5)
 
 def join_ps_link(link, content):
     webbrowser.open(link)

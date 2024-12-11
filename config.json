@@ -1,6 +1,7 @@
 {
     "discord_channel_link": "",
     "authorization_key": "",
+    "slower_autojoin (may be safer)": "0",
     "faster autojoin (may be dangerous)": "0",
     "extremely fast autojoin (dangerous)": "0"
 }
