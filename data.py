@@ -63,7 +63,7 @@ def main():
                 messagebox.showerror("ERROR!", "This is usually caused by the authentication key timing out. Try refreshing the authentication key.")
             message = response[0]
             messages.append(message["id"])
-            
+
             if message["id"] in messages:
                 continue
             link = re.findall(r'(https?://[^\s]+)', message["content"])[0]
@@ -73,7 +73,10 @@ def main():
             duration_in_s = duration.total_seconds()
             if divmod(duration_in_s, 3600)[0] < 1:
                 if divmod(duration_in_s, 60)[0] < 4:
-                    join_ps_link(link, message["content"])
+                    if "https://www.roblox.com/games/15532962292/Sols-RNG-Eon1-1?privateServerLinkCode=" in link:
+                        join_ps_link(link)
+                    else:
+                        print("In regards to the current crosswood situation, we have disabled all links that aren't sols rng links.")
 
             while len(messages) > 10:
                 messages.popleft()
@@ -89,7 +92,7 @@ def main():
         else:
             sleep(5)
 
-def join_ps_link(link, content):
+def join_ps_link(link):
     webbrowser.open(link)
 
 if __name__ == "__main__":
