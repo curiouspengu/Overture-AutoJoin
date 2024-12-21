@@ -60,8 +60,13 @@ def main():
                 messagebox.showerror("ERROR!", "This is usually caused by the authentication key timing out. Try refreshing the authentication key.")
             if response["message"] == "401: Unauthorized":
                 messagebox.showerror("ERROR!", "This is usually caused by the authentication key timing out. Try refreshing the authentication key.")
+            
             message = response[0]
-            messages.append(message["id"])
+            try:
+                messages.append(message["id"])
+            except:
+                message = message[0]
+                messages.append(message["id"])
 
             if message["id"] in messages:
                 continue
