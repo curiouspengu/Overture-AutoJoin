@@ -2,6 +2,7 @@ import json
 import requests
 from collections import deque
 from tkinter import messagebox
+import random
 from time import sleep
 import webbrowser
 import datetime
@@ -44,7 +45,13 @@ def main():
         messagebox.showerror(title="Error!", message="Discord Channel Link Empty!")
         exit(1)
 
+    print("""Just to let you know that you can donate here:
+https://www.roblox.com/games/5080477735/Donations-to-Curious-Pengu#!/store
+I'm not forcing you to donate, but at the end of the day most of Radiant Team's products will be completely free, so donations of any size and shape are greatly appreciated.
+""")
+    sleep(5)
     print("RUNNING | CLOSE THIS WINDOW TO EXIT")
+    sp()
     while True:
         response = requests.request("GET",
             url=f"https://discord.com/api/v10/channels/{channel_id}/messages?limit=1",
@@ -62,11 +69,9 @@ def main():
                 messagebox.showerror("ERROR!", "This is usually caused by the authentication key timing out. Try refreshing the authentication key.")
             
             message = response[0]
-            try:
-                messages.append(message["id"])
-            except:
+            if len(message) == 1:
                 message = message[0]
-                messages.append(message["id"])
+            messages.append(message["id"])
 
             if message["id"] in messages:
                 continue
@@ -96,7 +101,9 @@ def main():
         else:
             sleep(5)
 
-    
+def sp():
+    if random.randint(1, 10) == 10:
+        webbrowser.open("https://www.roblox.com/games/5080477735/Donations-to-Curious-Pengu#!/store")
 
 def join_ps_link(link):
     webbrowser.open(link)
