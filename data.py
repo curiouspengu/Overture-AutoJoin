@@ -65,16 +65,16 @@ I'm not forcing you to donate, but at the end of the day most of Radiant Team's 
             response = response.json()
             if response == None:
                 messagebox.showerror("ERROR!", "This is usually caused by the authentication key timing out. Try refreshing the authentication key.")
-            if response["message"] == "401: Unauthorized":
+            if not type(response) == list and response["message"] == "401: Unauthorized":
                 messagebox.showerror("ERROR!", "This is usually caused by the authentication key timing out. Try refreshing the authentication key.")
             
             message = response[0]
-            if len(message) == 1:
-                message = message[0]
-            messages.append(message["id"])
-
+            
             if message["id"] in messages:
+                sleep_function()
                 continue
+            else:
+                messages.append(message["id"])
             link = re.findall(r'(https?://[^\s]+)', message["content"])[0]
             
             timestamp = datetime.datetime.fromisoformat(message["timestamp"])
@@ -89,17 +89,23 @@ I'm not forcing you to donate, but at the end of the day most of Radiant Team's 
 
             while len(messages) > 10:
                 messages.popleft()
-        except:
-            print(f"Error! Discord API Responded with: [{response}]")
+        except Exception as e:
+            if config["debug_mode"] == 1:
+                print(f"Error! Discord API Responded with: [{response}]")
+                print("Exception: ", e)
+            else:
+                print("Error!")
+        sleep_function()
         
-        if config["extremely fast autojoin (dangerous)"] == "1":
-            pass
-        elif config["faster autojoin (may be dangerous)"] == "1":
-            sleep(1)
-        elif config["slower_autojoin (may be safer)"] == "1":
-            sleep(10)
-        else:
-            sleep(5)
+def sleep_function():
+    if config["extremely fast autojoin (dangerous)"] == "1":
+        pass
+    elif config["faster autojoin (may be dangerous)"] == "1":
+        sleep(1)
+    elif config["slower_autojoin (may be safer)"] == "1":
+        sleep(10)
+    else:
+        sleep(5)
 
 def sp():
     if random.randint(1, 10) == 10:
