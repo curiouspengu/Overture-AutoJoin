@@ -9,10 +9,10 @@ Join https://discord.gg/radiant-team for instructions.
 
 # Radiant Team
 ### Owners
-- **Curious Pengu** | _Pathing Development, Radiance Macro Development, Genesis Stat Tracker, Lunaria Pathing System_
+- **Curious Pengu** | _Pathing Development, Radiance Macro Development, Genesis Stat Tracker, Lunaria Pathing System, Overture AutoJoin, Singularity Link Sniper, ADSLS_
 ### Developers
 - **ManasAarohi** | _Pathing_
 ### Graphical Designer
 - **Cate**
 
-Overture AutoJoin © 2024 by Radiant Team is licensed under Creative Commons Attribution-ShareAlike 4.0 International 
+Overture AutoJoin © 2025 by Radiant Team is licensed under Creative Commons Attribution-ShareAlike 4.0 International 
